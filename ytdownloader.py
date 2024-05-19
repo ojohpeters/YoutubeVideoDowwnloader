@@ -35,8 +35,8 @@ def download_video(url, output_path):
             output_path = "."  # Default to current directory
         
         os.makedirs(output_path, exist_ok=True)
-        filename = f"{yt.title}.mp4"
-        stream.download(output_path=output_path, filename=filename)
+        stream.download(output_path=output_path, filename=yt.title)
+        file_path = os.path.join(output_path, f"{yt.title}.mp4")
            
         print(f"Downloaded: {yt.title} \n")
     except Exception as e:
