@@ -23,22 +23,27 @@ def download_video(url, output_path):
     try:
         print("Processing Video...")
         yt = YouTube(url)
+        title = yt.title
         stream = yt.streams.filter(res="720p", progressive=True, file_extension='mp4').first()
+        for i in ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']:
+            if i in title:
+                title = title.replace(i, '-')
+            
         
         if stream is None:
-            print(f"No suitable stream found for {yt.title}")
+            print(f"No suitable stream found for {title}")
             return
         
-        print(f"Downloading {yt.title}...")        
+        print(f"Downloading {title}...")        
         # Create directory if it doesn't exist
         if not output_path:
             output_path = "."  # Default to current directory
         
         os.makedirs(output_path, exist_ok=True)
-        filename = f"{yt.title}.mp4"
+        filename = f"{title}.mp4"
         stream.download(output_path=output_path, filename=filename)
            
-        print(f"Downloaded: {yt.title} \n")
+        print(f"Downloaded: {title} \n")
     except Exception as e:
         print(f"Error occurred: {str(e)}\n")        
 
