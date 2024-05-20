@@ -27,7 +27,7 @@ def download_video(url, output_path):
         stream = yt.streams.filter(res="720p", progressive=True, file_extension='mp4').first()
         for i in ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']:
             if i in title:
-                title = title.replace(i, '-')
+                title = title.replace(i, '')
             
         
         if stream is None:
